@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: IranSans_Light;
+    src: url(/fonts/IRANSansWeb_Light.ttf);
+    font-display: swap !important;
+}
+
+@font-face {
+    font-family: IranSans;
+    src: url(/fonts/IRANSansWeb.ttf);
+    font-display: swap !important;
+}
+
+ul li {
+    list-style-type: disc;
+}
+
+* {
+    font-family: IranSans !important;
+
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.fade-anime {
+    animation: fadeAnimation 2s ease-in-out infinite;
+}
+
+@keyframes fadeAnimation {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

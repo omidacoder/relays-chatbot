@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int                 @id @default(autoincrement())
+  name                String
+  phone               String              @unique
+  password            String?
+  verified            Boolean             @default(false)
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  chats               Chat[]              @relation("user-chat")
+  feedbacks         Feedback[]        @relation("user-feedback")
+}
+
+model Chat {
+  id                  Int                 @id @default(autoincrement())
+  botName             String
+  title               String?
+  userId              Int?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  user                User?                @relation("user-chat" , fields: [userId], references: [id],onDelete: SetNull)
+  messages            Message[]           @relation("chat-message")
+  
+}
+
+model Message {
+  id                  Int                 @id @default(autoincrement())
+  content             String
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  fromChatbot         Boolean             @default(false)
+  query               String?
+  chatId              Int?
+  chat                Chat?                @relation("chat-message" , fields: [chatId], references: [id],onDelete: SetNull)
+  sources             Source[]            @relation("message-source")
+  feedback          Feedback?         @relation("message-feedback")
+}
+
+model Source {
+  id                  Int                 @id @default(autoincrement())
+  content             String?
+  refference          String?
+  messageId           Int
+  message             Message             @relation("message-source" , fields: [messageId], references: [id],onDelete: Cascade)
+  
+}
+
+model Feedback {
+  id                  Int                 @id @default(autoincrement())
+  userId              Int?
+  messageId           Int                 @unique
+  query               String
+  response            String
+  isGood              Boolean             @default(true)
+  correctResponse     String?
+  user                User?                @relation("user-feedback" , fields: [userId], references: [id],onDelete: SetNull)
+  message             Message             @relation("message-feedback" , fields: [messageId], references: [id])
+  
+}
+
+model RelayDocument {
+  id                        Int     @id @default(autoincrement())
+  fileName                  String
+  documentType              String?
+  language                  String?
+  projectSubstationName     String?
+  digitalQuality            String?
+  operationalStatus         String?
+  documentVersion           String?
+  publicationYear           String?
+  manufacturer              String?
+  relayModel                String?
+  firmwareVersion           String?
+  communicationProtocols    String?
+  ioInputCount              String?
+  ioOutputCount             String?
+  assetType                 String?
+  assetSubtype              String?
+  voltageKv                 String?
+  voltageClass              String?
+  primaryProtectionFunction String?
+  allIdentifiedFunctions    String?
+  ansiCodes                 String?
+  redundancyRole            String?
+  isMultiFunctional         String?
+  technicalSummary          String?
+  extraDescriptions         String?
+}
+
+model OtherDocument {
+  id       Int     @id @default(autoincrement())
+  fileName String
+  language String?
+  summary  String?
+}
+
+// enum TicketStatus {
+//   PENDING
+//   ANSWERED
+//   CLOSED
+// }

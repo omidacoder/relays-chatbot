@@ -1,0 +1,9 @@
+export const SERVER_URL = "http://127.0.0.1:8000";
+export const SERVER_AUTH_URL = "http://localhost:8001";
+export const APP_URL = "http://127.0.0.1:3000";
+export const CHAT_URL = SERVER_AUTH_URL + "/chat";
+export const USER_URL = SERVER_AUTH_URL + "/admin/user"
+export const USER_DELETE_URL = SERVER_AUTH_URL + "/admin/user/delete";
+export const LOGIN_URL = SERVER_AUTH_URL + "/auth/user/login"
+export const MESSAGES_URL = SERVER_AUTH_URL + "/messages"
+export const FEEDBACK_URL = SERVER_AUTH_URL + "/feedback"
