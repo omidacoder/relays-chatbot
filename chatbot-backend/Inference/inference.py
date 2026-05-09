@@ -247,9 +247,9 @@ class Inference:
         do_online: bool = False,
     ) -> Generator[Tuple[str, str], None, None]:
 
-        ####################################################
+        
         # ONLINE GENERATION
-        ####################################################
+        
 
         if do_online:
 
@@ -258,9 +258,9 @@ class Inference:
                 base_url="https://api.avalai.ir/v1",
             )
 
-            ####################################################
+            
             # CONVERT MESSAGES FORMAT
-            ####################################################
+            
 
             openai_messages = []
 
@@ -290,9 +290,9 @@ class Inference:
                     "content": content,
                 })
 
-            ####################################################
+            
             # STREAM RESPONSE
-            ####################################################
+            
 
             response = client.chat.completions.create(
                 model=REMOTE_LLM_NAME,
@@ -326,9 +326,9 @@ class Inference:
 
             return
 
-        ####################################################
+        
         # LOCAL GENERATION
-        ####################################################
+        
 
         input_ids = self.build_input_ids(
             self.tokenizer,
@@ -426,9 +426,6 @@ class Inference:
                     access_token,
                     documents,
                 )
-
-        
-        # BUILD FINAL PROMPT
         
 
         prompt = self.build_prompt(
@@ -451,7 +448,6 @@ class Inference:
             }],
         })
 
-        # GENERATION
         
         final_response = ""
 
@@ -463,8 +459,6 @@ class Inference:
 
             yield chunk
 
-        
-        # STORE MEMORY
         
 
         self.memory_manager.add_interaction(
