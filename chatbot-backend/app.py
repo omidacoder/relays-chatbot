@@ -28,12 +28,12 @@ streamer_queue = Queue()
 if not USE_REMOTE_LLM:
     # Prepare models
     # model_path = "./G9"
-    model_path = "./G12"
-    # model_path = "./LLM"
-    # bnb_config = BitsAndBytesConfig(
-    #     load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16)
+    # model_path = "./G12"
+    model_path = "./LLM"
     bnb_config = BitsAndBytesConfig(
-        load_in_8bit=True)
+        load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16)
+    # bnb_config = BitsAndBytesConfig(
+    #     load_in_8bit=True)
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     model = AutoModelForCausalLM.from_pretrained(
         model_path,quantization_config=bnb_config,torch_dtype=torch.float32)

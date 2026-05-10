@@ -1,9 +1,9 @@
 
-from langchain.schema import Document as LangchainDoc
+from langchain_core.documents import Document as LangchainDoc
 from langchain_core.embeddings.embeddings import Embeddings
 from langchain_community.document_loaders import PyPDFLoader
 from tqdm import tqdm
-from langchain.schema import Document
+from langchain_core.documents import Document
 import os
 from langchain_community.vectorstores import Chroma
 from sentence_transformers import SentenceTransformer, models

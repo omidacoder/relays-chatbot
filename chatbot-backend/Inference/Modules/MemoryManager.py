@@ -1,7 +1,7 @@
 from typing import List, Dict, Optional
 from datetime import datetime, timezone
 import uuid
-from langchain.memory import ConversationSummaryBufferMemory
+from langchain_classic.memory import ConversationSummaryBufferMemory
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -104,7 +104,6 @@ class MemoryManager:
 
     # SUMMARY AND RECENT MEMORY FORMATTING
     def get_summary_and_recent_messages(self) -> List[Dict]:
-        """Gets LangChain's managed buffer (Summary + Recent Messages)"""
         summary_data = self.summary_memory.load_memory_variables({})
         history = summary_data.get("history", [])
 
@@ -142,11 +141,6 @@ class MemoryManager:
 
     # MAIN MEMORY ROUTER
     def build_memory_context(self, query: str) -> List[Dict]:
-        """
-        Builds the context window for the LLM.
-        Relies on LangChain to manage the Short-term -> Summary transition,
-        and manually injects semantic memory if the conversation is long enough.
-        """
         turns_count = len(self.chat_history) // 2
         
         # Get LangChain's memory (This handles both raw recent messages AND summaries)

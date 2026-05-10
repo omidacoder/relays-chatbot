@@ -17,8 +17,8 @@ from PromptBuilders.prompts import (
     no_rag_prompt_template,
     question_prompt_template,
 )
-from RetrievalEvaluators import crag_filter
-from similarity_threshold import filter_based_on_similarity
+from RetrievalEvaluators.crag import crag_filter
+from Inference.similarity_threshold import filter_based_on_similarity
 from Inference.Modules.MemoryManager import MemoryManager
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

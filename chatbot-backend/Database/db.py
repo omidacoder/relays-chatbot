@@ -1,5 +1,5 @@
 import urllib3
-from langchain.schema import Document as LangchainDoc
+from langchain_core.documents import Document as LangchainDoc
 
 db_app_url = "http://127.0.0.1:8001"
 def login(phone, password):
